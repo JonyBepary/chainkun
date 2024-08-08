@@ -1,0 +1,32 @@
+---
+hyperledger-fabric:
+  fabric: 2.5.3
+  ca: 1.5.12
+  components:
+    - docker
+    - binary
+    # - samples
+    # - podman
+
+cc-tool:
+  repo: https://github.com/hyperledger-labs/cc-tools-demo
+  branch: main
+chaincode:
+  name: chainkun
+  label: 1.0
+  version: 0.1
+  sequence: 1
+
+network:
+  ccas: false
+  org_qnty: 3
+  ccaas: false
+  CcasTls: "1.3"
+  orgs:
+    - org1MSP
+    - org2MSP
+    - org3MSP
+
+system:
+  path: /home/jony/.chainkun
+  go: "1.22.5"
