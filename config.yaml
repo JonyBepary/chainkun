@@ -1,6 +1,6 @@
 ---
 hyperledger-fabric:
-  fabric: 2.5.3
+  fabric: 2.5.9
   ca: 1.5.12
   components:
     - docker
