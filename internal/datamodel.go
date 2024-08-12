@@ -44,7 +44,7 @@ func (CS *ConfigStruct) CreateConfigFile(filePath string) error {
 			CA         string   `yaml:"ca"`
 			Components []string `yaml:"components"`
 		}{
-			Fabric:     "2.5.3",
+			Fabric:     "2.5.9",
 			CA:         "1.5.12",
 			Components: []string{"docker", "binary"},
 		},
@@ -100,18 +100,19 @@ func (CS *ConfigStruct) CreateConfigFile(filePath string) error {
 	return nil
 }
 
-func InitConfig(cfgPath string) (*ConfigStruct, error) {
+func ReadCfgFile(cfgPath string) (ConfigStruct, error) {
+
 	if _, err := os.Stat(cfgPath); os.IsNotExist(err) {
-		return nil, fmt.Errorf("config.yaml file is missing: %w", err)
+		return ConfigStruct{}, fmt.Errorf("config file does not exist: %w", err)
 	}
 	yamlFile, err := os.ReadFile(cfgPath)
 	if err != nil {
-		return nil, fmt.Errorf("error reading config file: %w", err)
+		return ConfigStruct{}, fmt.Errorf("error reading config file: %w", err)
 	}
 	var cfg ConfigStruct
 	err = yaml.Unmarshal(yamlFile, &cfg)
 	if err != nil {
-		return nil, fmt.Errorf("error unmarshalling config file: %w", err)
+		return ConfigStruct{}, fmt.Errorf("error unmarshalling config file: %w", err)
 	}
-	return &cfg, nil
+	return cfg, nil
 }
