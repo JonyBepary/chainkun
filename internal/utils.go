@@ -55,6 +55,40 @@ func InitChaincode(root string) {
 		if err != nil {
 			panic(err)
 		}
+		err = os.MkdirAll(path.Join(root, "tmp"), 0755)
+		if err != nil {
+			panic(err)
+		}
+		err = os.MkdirAll(path.Join(root, "binaries"), 0755)
+		if err != nil {
+			panic(err)
+		}
+		err = os.MkdirAll(path.Join(root, "binaries", "default"), 0755)
+		if err != nil {
+			panic(err)
+		}
+
+		err = os.MkdirAll(path.Join(root, "binaries", "fabric_bin"), 0755)
+		if err != nil {
+			panic(err)
+		}
+		err = os.MkdirAll(path.Join(root, "binaries", "fabric_bin", "default"), 0755)
+		if err != nil {
+			panic(err)
+		}
+		err = os.MkdirAll(path.Join(root, "binaries", "ca_bin"), 0755)
+		if err != nil {
+			panic(err)
+		}
+		err = os.MkdirAll(path.Join(root, "binaries", "ca_bin", "default"), 0755)
+		if err != nil {
+			panic(err)
+		}
+		err = os.MkdirAll(path.Join(root, "repo"), 0755)
+		if err != nil {
+			panic(err)
+		}
+
 	}
 	// check if config exists
 	_, err = os.Stat(path.Join(root, "config.yaml"))
@@ -63,11 +97,6 @@ func InitChaincode(root string) {
 	} else {
 		var CS ConfigStruct
 		CS.CreateConfigFile(path.Join(root, "config.yaml"))
-		err := downloadBinaries(CS)
-		if err != nil {
-			panic(err)
-		}
-
 	}
 	//
 }
